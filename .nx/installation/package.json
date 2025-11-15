@@ -1,6 +1,0 @@
-{
-  "name": "nx-installation",
-  "devDependencies": {
-    "nx": "22.0.3"
-  }
-}
