@@ -1,9 +1,4 @@
-<form
-  [formGroup]="candidateForm"
-  (ngSubmit)="onSubmit()"
-  class="candidate-form"
-  #formDir="ngForm"
->
+<form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" class="candidate-form" #formDir="ngForm">
   <mat-form-field appearance="outline">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" required />
@@ -24,25 +19,16 @@
 
   <div class="file-input-container">
     <label for="file-input">Excel File *</label>
-    <input
-      id="file-input"
-      type="file"
-      (change)="onFileSelected($event)"
-      accept=".xlsx,.xls"
-      required
-    />
+    <input id="file-input" type="file" (change)="onFileSelected($event)" accept=".xlsx,.xls" required
+      formControlName="file" />
     <div class="error-message">
-      @if (candidateForm.get('file')?.hasError('required')) { Excel file is
-      required }
+      @if (candidateForm.get('file')?.hasError('required') && candidateForm.get('file')?.touched) {
+      Excel file is required
+      }
     </div>
   </div>
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="candidateForm.invalid"
-  >
+  <button mat-raised-button color="primary" type="submit" [disabled]="candidateForm.invalid">
     Process Candidate
   </button>
 </form>

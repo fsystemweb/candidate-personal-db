@@ -42,7 +42,7 @@ export class CandidateFormComponent {
   candidateForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
     surname: ['', [Validators.required]],
-    file: [null, [Validators.required]],
+    file: [null as File | null],
   });
 
   fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
@@ -50,8 +50,20 @@ export class CandidateFormComponent {
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
+    const fileControl = this.candidateForm.get('file');
+
     if (input.files?.length) {
-      this.candidateForm.patchValue({ file: input.files[0] });
+      fileControl?.patchValue(input.files[0]);
+    } else {
+      fileControl?.patchValue(null);
+    }
+
+    fileControl?.markAsTouched();
+
+    if (!fileControl?.value) {
+      fileControl?.setErrors({ required: true });
+    } else {
+      fileControl?.setErrors(null);
     }
   }
 
