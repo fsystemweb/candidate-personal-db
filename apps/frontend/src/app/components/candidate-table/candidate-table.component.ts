@@ -2,8 +2,8 @@ import {
   Component,
   input,
   ChangeDetectionStrategy,
-  ViewChild,
-  AfterViewInit,
+  viewChild,
+  effect,
 } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
@@ -13,74 +13,16 @@ import { Candidate } from '@candidate-db/shared';
 
 @Component({
   selector: 'app-candidate-table',
-  standalone: true,
   imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="table-container">
-      <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-        class="mat-elevation-8"
-      >
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-          <td mat-cell *matCellDef="let candidate">{{ candidate.name }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="surname">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Surname</th>
-          <td mat-cell *matCellDef="let candidate">{{ candidate.surname }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="seniority">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Seniority</th>
-          <td mat-cell *matCellDef="let candidate">
-            {{ candidate.seniority }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="years">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Years</th>
-          <td mat-cell *matCellDef="let candidate">{{ candidate.years }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="availability">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Available</th>
-          <td mat-cell *matCellDef="let candidate">
-            {{ candidate.availability ? 'Yes' : 'No' }}
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons
-      ></mat-paginator>
-    </div>
-  `,
-  styles: [
-    `
-      .table-container {
-        width: 100%;
-        overflow-x: auto;
-      }
-
-      table {
-        width: 100%;
-      }
-    `,
-  ],
+  templateUrl: './candidate-table.component.html',
+  styleUrl: './candidate-table.component.scss',
 })
-export class CandidateTableComponent implements AfterViewInit {
+export class CandidateTableComponent {
   candidates = input.required<Candidate[]>();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  paginator = viewChild<MatPaginator>(MatPaginator);
+  sort = viewChild<MatSort>(MatSort);
 
   displayedColumns: string[] = [
     'name',
@@ -91,15 +33,23 @@ export class CandidateTableComponent implements AfterViewInit {
   ];
   dataSource = new MatTableDataSource<Candidate>([]);
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.dataSource.data = this.candidates();
-  }
-
-  ngOnChanges(): void {
-    if (this.dataSource) {
+  constructor() {
+    effect(() => {
       this.dataSource.data = this.candidates();
-    }
+      this.paginator()?.firstPage();
+    });
+
+    effect(() => {
+      const paginatorInstance = this.paginator();
+      const sortInstance = this.sort();
+
+      if (paginatorInstance) {
+        this.dataSource.paginator = paginatorInstance;
+      }
+
+      if (sortInstance) {
+        this.dataSource.sort = sortInstance;
+      }
+    });
   }
 }

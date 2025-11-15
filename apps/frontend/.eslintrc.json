@@ -4,6 +4,7 @@
   "overrides": [
     {
       "files": ["*.ts"],
+      "excludedFiles": ["*.spec.ts"],
       "rules": {}
     },
     {

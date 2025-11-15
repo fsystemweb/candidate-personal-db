@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>Candidate Management</h2>
+
+  <app-candidate-form (formSubmit)="onFormSubmit($event)" />
+
+  @if(loading()){
+  <div class="loading">
+    <mat-spinner />
+    <p>Processing candidate...</p>
+  </div>
+  } @if(candidates().length > 0){
+  <div class="actions" *ngIf="">
+    <button mat-raised-button color="warn" (click)="clearCandidates()">
+      Clear All Candidates
+    </button>
+  </div>
+
+  <app-candidate-table [candidates]="candidates()" />
+  } @if(candidates().length === 0 && !loading()){
+  <div class="empty-state">
+    <p>No candidates processed yet. Upload an Excel file to get started.</p>
+  </div>
+  }
+</div>
