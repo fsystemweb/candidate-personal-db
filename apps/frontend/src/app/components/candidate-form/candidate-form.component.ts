@@ -3,17 +3,21 @@ import {
   output,
   inject,
   ChangeDetectionStrategy,
+  ElementRef,
+  viewChild,
 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormGroupDirective,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-candidate-form',
@@ -24,6 +28,7 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './candidate-form.component.html',
@@ -39,6 +44,9 @@ export class CandidateFormComponent {
     surname: ['', [Validators.required]],
     file: [null, [Validators.required]],
   });
+
+  fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+  formDirective = viewChild<FormGroupDirective>('formDir');
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -56,7 +64,18 @@ export class CandidateFormComponent {
       formData.append('file', values.file);
 
       this.formSubmit.emit(formData);
-      this.candidateForm.reset();
+
+      this.resetForm();
+    }
+  }
+
+  private resetForm(): void {
+    this.candidateForm.reset();
+    this.formDirective()!.resetForm();
+
+    const fileInputElement = this.fileInput()?.nativeElement;
+    if (fileInputElement) {
+      fileInputElement.value = '';
     }
   }
 }
