@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { tap, catchError, finalize, takeUntil } from 'rxjs/operators';
+import { tap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
 import { CandidateTableComponent } from '../candidate-table/candidate-table.component';
