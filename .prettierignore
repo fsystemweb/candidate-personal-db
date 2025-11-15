@@ -1,0 +1,11 @@
+# Ignore entire folders
+node_modules/
+dist/
+build/
+coverage/
+.angular/
+.nx/
+
+# Ignore specific files
+*.min.js
+.env

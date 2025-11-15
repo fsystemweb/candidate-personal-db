@@ -9,7 +9,12 @@
     "test:all": "nx run-many --target=test --projects=shared,backend,frontend",
     "serve:frontend": "nx serve frontend",
     "serve:backend": "nx serve backend",
-    "dev": "concurrently \"npm run serve:backend\" \"npm run serve:frontend\""
+    "dev": "concurrently \"npm run serve:backend\" \"npm run serve:frontend\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "nx run-many --target=lint --projects=shared,backend,frontend",
+    "lint:check": "nx run-many --target=lint --projects=shared,backend,frontend",
+    "lint:fix": "nx run-many --target=lint --projects=shared,backend,frontend --fix"
   },
   "private": true,
   "dependencies": {

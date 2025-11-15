@@ -18,8 +18,8 @@ describe('CandidateFormComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        NoopAnimationsModule
-      ]
+        NoopAnimationsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CandidateFormComponent);
@@ -33,27 +33,27 @@ describe('CandidateFormComponent', () => {
 
   it('should validate required fields', () => {
     expect(component.candidateForm.valid).toBeFalsy();
-    
+
     component.candidateForm.patchValue({
       name: 'John',
       surname: 'Doe',
-      file: new File([''], 'test.xlsx')
+      file: new File([''], 'test.xlsx'),
     });
-    
+
     expect(component.candidateForm.valid).toBeTruthy();
   });
 
   it('should emit form data on submit', () => {
     jest.spyOn(component.formSubmit, 'emit');
-    
+
     component.candidateForm.patchValue({
       name: 'John',
       surname: 'Doe',
-      file: new File([''], 'test.xlsx')
+      file: new File([''], 'test.xlsx'),
     });
-    
+
     component.onSubmit();
-    
+
     expect(component.formSubmit.emit).toHaveBeenCalled();
   });
 });

@@ -3,10 +3,10 @@ const XLSX = require('xlsx');
 // Create sample Excel file for testing
 const sampleData = [
   {
-    'Seniority': 'junior',
+    Seniority: 'junior',
     'Years of experience': 5,
-    'Availability': true
-  }
+    Availability: true,
+  },
 ];
 
 const worksheet = XLSX.utils.json_to_sheet(sampleData);

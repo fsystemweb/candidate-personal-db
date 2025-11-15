@@ -4,7 +4,7 @@ import {
   Body,
   UploadedFile,
   UseInterceptors,
-  BadRequestException
+  BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CandidatesService } from './candidates.service';
@@ -27,11 +27,13 @@ export class CandidatesController {
 
     const allowedMimeTypes = [
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'application/vnd.ms-excel'
+      'application/vnd.ms-excel',
     ];
 
     if (!allowedMimeTypes.includes(file.mimetype)) {
-      throw new BadRequestException('Only Excel files (.xlsx, .xls) are allowed');
+      throw new BadRequestException(
+        'Only Excel files (.xlsx, .xls) are allowed'
+      );
     }
 
     return this.candidatesService.processCandidate(candidateData, file);
