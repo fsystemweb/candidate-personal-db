@@ -3,12 +3,14 @@ import {
   inject,
   ChangeDetectionStrategy,
   signal,
+  DestroyRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { tap, catchError, finalize } from 'rxjs/operators';
+import { tap, catchError, finalize, takeUntil } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
 import { CandidateTableComponent } from '../candidate-table/candidate-table.component';
@@ -18,7 +20,6 @@ import { Candidate } from '@candidate-db/shared';
 
 @Component({
   selector: 'app-candidate-container',
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,
@@ -27,74 +28,14 @@ import { Candidate } from '@candidate-db/shared';
     CandidateTableComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="container">
-      <h2>Candidate Management</h2>
-
-      <app-candidate-form
-        (formSubmit)="onFormSubmit($event)"
-      ></app-candidate-form>
-
-      <div class="loading" *ngIf="loading()">
-        <mat-spinner></mat-spinner>
-        <p>Processing candidate...</p>
-      </div>
-
-      <div class="actions" *ngIf="candidates().length > 0">
-        <button mat-raised-button color="warn" (click)="clearCandidates()">
-          Clear All Candidates
-        </button>
-      </div>
-
-      <app-candidate-table
-        *ngIf="candidates().length > 0"
-        [candidates]="candidates()"
-      >
-      </app-candidate-table>
-
-      <div class="empty-state" *ngIf="candidates().length === 0 && !loading()">
-        <p>No candidates processed yet. Upload an Excel file to get started.</p>
-      </div>
-    </div>
-  `,
-  styles: [
-    `
-      .container {
-        padding: 24px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .loading {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        margin: 24px 0;
-      }
-
-      .actions {
-        margin: 24px 0;
-        text-align: center;
-      }
-
-      .empty-state {
-        text-align: center;
-        margin: 48px 0;
-        color: #666;
-      }
-
-      h2 {
-        text-align: center;
-        margin-bottom: 32px;
-      }
-    `,
-  ],
+  templateUrl: './candidate-container.component.html',
+  styleUrl: './candidate-container.component.scss',
 })
 export class CandidateContainerComponent {
   private readonly candidateService = inject(CandidateService);
   private readonly persistenceService = inject(PersistenceService);
   private readonly snackBar = inject(MatSnackBar);
+  private destroyRef = inject(DestroyRef);
 
   candidates = signal<Candidate[]>(this.persistenceService.loadCandidates());
   loading = signal(false);
@@ -125,7 +66,8 @@ export class CandidateContainerComponent {
           );
           return of(null);
         }),
-        finalize(() => this.loading.set(false))
+        finalize(() => this.loading.set(false)),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

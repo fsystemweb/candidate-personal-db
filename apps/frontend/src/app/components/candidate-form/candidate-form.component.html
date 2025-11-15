@@ -1,0 +1,35 @@
+<form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" class="candidate-form">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+        @if (candidateForm.get('name')?.hasError('required')) {
+            <mat-error>
+                Name is required
+            </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Surname</mat-label>
+        <input matInput formControlName="surname" required />
+        @if (candidateForm.get('surname')?.hasError('required')) {
+            <mat-error>
+                Surname is required
+            </mat-error>
+        }
+    </mat-form-field>
+
+    <div class="file-input-container">
+        <label for="file-input">Excel File *</label>
+        <input id="file-input" type="file" (change)="onFileSelected($event)" accept=".xlsx,.xls" required />
+        <div class="error-message">
+            @if (candidateForm.get('file')?.hasError('required')) {
+                Excel file is required
+            }
+        </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="candidateForm.invalid">
+        Process Candidate
+    </button>
+</form>
