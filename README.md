@@ -17,14 +17,14 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Angular](https://img.shields.io/badge/Angular-v17-DD0031?logo=angular)](https://angular.io)
-[![NestJS](https://img.shields.io/badge/NestJS-v10-ea2845?logo=nestjs)](https://nestjs.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![NX](https://img.shields.io/badge/NX-17.0.0-4A90E2?logo=nx)](https://nx.dev)
+[![Angular](https://img.shields.io/badge/Angular-v20.0+-DD0031?logo=angular)](https://angular.io)
+[![NestJS](https://img.shields.io/badge/NestJS-v10.0+-ea2845?logo=nestjs)](https://nestjs.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8--x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![NX](https://img.shields.io/badge/NX-22.0.3-4A90E2?logo=nx)](https://nx.dev)
 [![Monorepo](https://img.shields.io/badge/Monorepo-Nx-000000)](https://nx.dev)
-[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-f8bc45?logo=prettier)](https://prettier.io)
-[![Linting: ESLint](https://img.shields.io/badge/linting-ESLint-4B32C3?logo=eslint)](https://eslint.org)
-[![Testing: Jest](https://img.shields.io/badge/test-Jest-C21325?logo=jest)](https://jestjs.io)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier_2.6.2-f8bc45?logo=prettier)](https://prettier.io)
+[![Linting: ESLint](https://img.shields.io/badge/linting-ESLint_8.57.0-4B32C3?logo=eslint)](https://eslint.org)
+[![Testing: Jest](https://img.shields.io/badge/test-Jest_30.2.0-C21325?logo=jest)](https://jestjs.io)
 
 </div>
 
