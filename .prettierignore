@@ -4,6 +4,7 @@ dist/
 build/
 coverage/
 .angular/
+.nx/
 
 # Ignore specific files
 *.min.js
