@@ -35,7 +35,7 @@
   - Error handling for invalid files/data
   - CORS enabled for frontend communication
 
-### Frontend (Angular 17)
+### Frontend (Angular 20)
 
 - **Port:** 4200
 - **Architecture:** Standalone components
