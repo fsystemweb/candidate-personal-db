@@ -16,11 +16,11 @@ export class CandidatesService {
     }
 
     const excelData = await this.parseExcelFile(file);
-    
+
     return {
       name: candidateData.name,
       surname: candidateData.surname,
-      ...excelData
+      ...excelData,
     };
   }
 
@@ -36,16 +36,21 @@ export class CandidatesService {
       }
 
       const rowData = jsonData[0] as any;
-      
+
       const excelDto = plainToClass(CandidateExcelDto, {
         seniority: rowData.Seniority?.toLowerCase(),
         years: Number(rowData['Years of experience']),
-        availability: Boolean(rowData.Availability)
+        availability: Boolean(rowData.Availability),
       });
 
       const errors = await validate(excelDto);
       if (errors.length > 0) {
-        throw new BadRequestException(`Invalid Excel data: ${errors.map(e => Object.values(e.constraints || {})).flat().join(', ')}`);
+        throw new BadRequestException(
+          `Invalid Excel data: ${errors
+            .map((e) => Object.values(e.constraints || {}))
+            .flat()
+            .join(', ')}`
+        );
       }
 
       return excelDto;

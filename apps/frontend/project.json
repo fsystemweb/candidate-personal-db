@@ -14,13 +14,8 @@
         "main": "apps/frontend/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/frontend/tsconfig.app.json",
-        "assets": [
-          "apps/frontend/src/favicon.ico",
-          "apps/frontend/src/assets"
-        ],
-        "styles": [
-          "apps/frontend/src/styles.scss"
-        ],
+        "assets": ["apps/frontend/src/favicon.ico", "apps/frontend/src/assets"],
+        "styles": ["apps/frontend/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -68,6 +63,13 @@
       "options": {
         "jestConfig": "apps/frontend/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/frontend/**/*.ts"]
       }
     }
   },

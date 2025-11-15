@@ -3,15 +3,17 @@
 ## Quick Start
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Start development servers:**
+
    ```bash
    # Backend (port 3000)
    npm run serve:backend
-   
+
    # Frontend (port 4200) - in another terminal
    npm run serve:frontend
    ```
@@ -24,6 +26,7 @@
 ## Project Structure
 
 ### Backend (NestJS)
+
 - **Port:** 3000
 - **API Endpoint:** POST `/candidates/process`
 - **Features:**
@@ -33,6 +36,7 @@
   - CORS enabled for frontend communication
 
 ### Frontend (Angular 17)
+
 - **Port:** 4200
 - **Architecture:** Standalone components
 - **Features:**
@@ -43,6 +47,7 @@
   - Table with pagination and sorting
 
 ### Shared Library
+
 - **Purpose:** Type definitions shared between frontend and backend
 - **Location:** `libs/shared/src/lib/models/`
 
@@ -72,6 +77,7 @@ npx nx build frontend
 ## Excel File Format
 
 The Excel file should contain one row with these columns:
+
 - **Seniority:** "junior" or "senior"
 - **Years of experience:** Number (e.g., 5)
 - **Availability:** Boolean (true/false)
@@ -81,6 +87,7 @@ Use the provided `sample-candidate.xlsx` for testing.
 ## Key Implementation Details
 
 ### Angular Features Used
+
 - Standalone components (no NgModules)
 - Input signals with `input()`
 - Output signals with `output()`
@@ -89,6 +96,7 @@ Use the provided `sample-candidate.xlsx` for testing.
 - RxJS operators (switchMap, tap, catchError, finalize)
 
 ### NestJS Features Used
+
 - Modular architecture
 - DTO validation with decorators
 - File upload with Multer
@@ -96,6 +104,7 @@ Use the provided `sample-candidate.xlsx` for testing.
 - Exception handling
 
 ### Development Tools
+
 - Nx monorepo for project management
 - Jest for unit testing
 - ESLint for code quality
@@ -114,6 +123,7 @@ Use the provided `sample-candidate.xlsx` for testing.
 ### Debug Mode
 
 Start backend in debug mode:
+
 ```bash
 npx nx serve backend --inspect
 ```

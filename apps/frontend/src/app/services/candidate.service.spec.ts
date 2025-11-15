@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { CandidateService } from './candidate.service';
 import { CandidateResponse } from '@candidate-db/shared';
 
@@ -10,7 +13,7 @@ describe('CandidateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [CandidateService]
+      providers: [CandidateService],
     });
     service = TestBed.inject(CandidateService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -30,12 +33,12 @@ describe('CandidateService', () => {
       surname: 'Doe',
       seniority: 'junior',
       years: 5,
-      availability: true
+      availability: true,
     };
 
     const file = new File([''], 'test.xlsx');
-    
-    service.processCandidates('John', 'Doe', file).subscribe(response => {
+
+    service.processCandidates('John', 'Doe', file).subscribe((response) => {
       expect(response).toEqual(mockResponse);
     });
 

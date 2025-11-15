@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Candidate } from '@candidate-db/shared';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PersistenceService {
   private readonly storageKey = 'candidates';

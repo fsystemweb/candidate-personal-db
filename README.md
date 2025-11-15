@@ -54,16 +54,19 @@ candidate-personal-db/
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start the backend server:
+
 ```bash
 npm run serve:backend
 ```
 
 3. Start the frontend application:
+
 ```bash
 npm run serve:frontend
 ```
@@ -73,6 +76,7 @@ npm run serve:frontend
 ### Excel File Format
 
 The Excel file should contain a single row with the following columns:
+
 - **Seniority**: "junior" or "senior"
 - **Years of experience**: Number (e.g., 5)
 - **Availability**: Boolean (true/false)
@@ -84,11 +88,13 @@ The Excel file should contain a single row with the following columns:
 Processes candidate data with Excel file upload.
 
 **Request:**
+
 - `name` (string, required): Candidate's first name
 - `surname` (string, required): Candidate's last name
 - `file` (Excel file, required): .xlsx or .xls file with candidate data
 
 **Response:**
+
 ```json
 {
   "name": "John",
@@ -102,11 +108,13 @@ Processes candidate data with Excel file upload.
 ## Testing
 
 Run all tests:
+
 ```bash
 npm test
 ```
 
 Run tests for specific project:
+
 ```bash
 nx test frontend
 nx test backend
@@ -116,11 +124,13 @@ nx test shared
 ## Build
 
 Build all projects:
+
 ```bash
 npm run build
 ```
 
 Build specific project:
+
 ```bash
 nx build frontend
 nx build backend
@@ -129,6 +139,7 @@ nx build backend
 ## Architecture Highlights
 
 ### Frontend (Angular 20)
+
 - **Standalone Components**: No NgModules, using new standalone API
 - **Input Signals**: Modern component communication with `input()`
 - **Reactive Forms**: Form validation and handling
@@ -137,6 +148,7 @@ nx build backend
 - **RxJS Patterns**: Reactive programming with observables
 
 ### Backend (NestJS)
+
 - **Modular Architecture**: Feature-based modules
 - **DTO Validation**: class-validator for request validation
 - **File Upload**: Multer integration for Excel processing
@@ -144,22 +156,26 @@ nx build backend
 - **Type Safety**: Shared types with frontend
 
 ### Shared Library
+
 - **Type Definitions**: Common interfaces and types
 - **Monorepo Benefits**: Single source of truth for data models
 
 ## Key Features Implementation
 
 1. **File Upload & Validation**
+
    - File type validation (.xlsx, .xls only)
    - Excel parsing with error handling
    - Form validation with Material UI feedback
 
 2. **Data Persistence**
+
    - Browser localStorage for client-side storage
    - Incremental candidate storage
    - Data survives page refresh
 
 3. **User Experience**
+
    - Loading states during file processing
    - Error messages with Material snackbars
    - Responsive design for desktop and tablet
@@ -170,4 +186,3 @@ nx build backend
    - Comprehensive unit tests
    - ESLint and Prettier configuration
    - Nx workspace optimization
-
