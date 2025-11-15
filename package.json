@@ -13,7 +13,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "nx run-many --target=lint --projects=shared,backend,frontend",
-    "lint:check": "nx run-many --target=lint --projects=shared,backend,frontend",
     "lint:fix": "nx run-many --target=lint --projects=shared,backend,frontend --fix"
   },
   "private": true,

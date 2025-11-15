@@ -1,16 +1,34 @@
-# Candidate Personal DB
+<h1 align="center">Candidate Personal DB</h1>
 
-A full-stack candidate management application built with Angular 20, NestJS, and Nx monorepo. Upload Excel files with candidate data and manage profiles efficiently with instant processing and persistent storage.
+<p align="center">
+  <img src="docs/logo.png" alt="logo" width="120px" height="120px"/>
+  <br>
+  <em>AA full-stack candidate management application built with Angular 20, NestJS, and Nx monorepo. 
+    <br> Upload Excel files with candidate data and manage profiles efficiently with instant processing and persistent storage locally.</em>
+  <br>
+</p>
 
-## Features
+<p align="center">
+  <a href="docs/DEVELOPMENT.md">Devlopment Guidelines</a>
+  <br>
+  <br>
+</p>
 
-- **Excel File Processing**: Upload .xlsx/.xls files with candidate data
-- **Real-time Validation**: Form and file validation with error handling
-- **Persistent Storage**: Browser localStorage for data persistence
-- **Material Design**: Modern UI with Angular Material components
-- **Reactive Programming**: RxJS and Angular Signals for state management
-- **Type Safety**: Shared TypeScript types between frontend and backend
-- **Testing**: Comprehensive Jest unit tests
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Angular](https://img.shields.io/badge/Angular-v17-DD0031?logo=angular)](https://angular.io)
+[![NestJS](https://img.shields.io/badge/NestJS-v10-ea2845?logo=nestjs)](https://nestjs.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![NX](https://img.shields.io/badge/NX-17.0.0-4A90E2?logo=nx)](https://nx.dev)
+[![Monorepo](https://img.shields.io/badge/Monorepo-Nx-000000)](https://nx.dev)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-f8bc45?logo=prettier)](https://prettier.io)
+[![Linting: ESLint](https://img.shields.io/badge/linting-ESLint-4B32C3?logo=eslint)](https://eslint.org)
+[![Testing: Jest](https://img.shields.io/badge/test-Jest-C21325?logo=jest)](https://jestjs.io)
+
+</div>
+
+<hr>
 
 ## Tech Stack
 
@@ -29,9 +47,6 @@ candidate-personal-db/
 │   ├── frontend/          # Angular 20 application
 │   │   ├── src/app/
 │   │   │   ├── components/
-│   │   │   │   ├── candidate-form/
-│   │   │   │   ├── candidate-table/
-│   │   │   │   └── candidate-container/
 │   │   │   └── services/
 │   │   └── project.json
 │   └── backend/           # NestJS application
@@ -136,6 +151,36 @@ nx build frontend
 nx build backend
 ```
 
+## Run lint
+
+Run lint check:
+
+```bash
+npm run lint
+```
+
+Run lint fix:
+
+```bash
+npm run lint:dix
+
+```
+
+## Run format
+
+Run format check:
+
+```bash
+npm run format:check
+```
+
+Run format fix:
+
+```bash
+npm run format
+
+```
+
 ## Architecture Highlights
 
 ### Frontend (Angular 20)
@@ -159,30 +204,3 @@ nx build backend
 
 - **Type Definitions**: Common interfaces and types
 - **Monorepo Benefits**: Single source of truth for data models
-
-## Key Features Implementation
-
-1. **File Upload & Validation**
-
-   - File type validation (.xlsx, .xls only)
-   - Excel parsing with error handling
-   - Form validation with Material UI feedback
-
-2. **Data Persistence**
-
-   - Browser localStorage for client-side storage
-   - Incremental candidate storage
-   - Data survives page refresh
-
-3. **User Experience**
-
-   - Loading states during file processing
-   - Error messages with Material snackbars
-   - Responsive design for desktop and tablet
-   - Pagination and sorting for candidate table
-
-4. **Code Quality**
-   - TypeScript strict mode
-   - Comprehensive unit tests
-   - ESLint and Prettier configuration
-   - Nx workspace optimization
