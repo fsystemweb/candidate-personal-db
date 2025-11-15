@@ -84,33 +84,6 @@ The Excel file should contain one row with these columns:
 
 Use the provided `sample-candidate.xlsx` for testing.
 
-## Key Implementation Details
-
-### Angular Features Used
-
-- Standalone components (no NgModules)
-- Input signals with `input()`
-- Output signals with `output()`
-- Reactive forms with validation
-- OnPush change detection strategy
-- RxJS operators (switchMap, tap, catchError, finalize)
-
-### NestJS Features Used
-
-- Modular architecture
-- DTO validation with decorators
-- File upload with Multer
-- Global validation pipes
-- Exception handling
-
-### Development Tools
-
-- Nx monorepo for project management
-- Jest for unit testing
-- ESLint for code quality
-- TypeScript strict mode
-- Angular Material for UI components
-
 ## Troubleshooting
 
 ### Common Issues
