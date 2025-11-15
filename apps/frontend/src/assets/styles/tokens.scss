@@ -1,0 +1,142 @@
+@use "@angular/material" as mat;
+
+
+/* Light Theme */
+:root, :host {
+  @include mat.theme-overrides((
+    primary: #2c638a,
+    on-primary: #ffffff,
+    primary-container: #cce5ff,
+    on-primary-container: #001e31,
+    inverse-primary: #99ccf9,
+    primary-fixed: #cce5ff,
+    primary-fixed-dim: #99ccf9,
+    on-primary-fixed: #001e31,
+    on-primary-fixed-variant: #074b71,
+    secondary: #4e6071,
+    on-secondary: #ffffff,
+    secondary-container: #d2e5f9,
+    on-secondary-container: #0a1d2c,
+    secondary-fixed: #d2e5f9,
+    secondary-fixed-dim: #b6c9dc,
+    on-secondary-fixed: #0a1d2c,
+    on-secondary-fixed-variant: #374959,
+    tertiary: #775083,
+    on-tertiary: #ffffff,
+    tertiary-container: #f9d8ff,
+    on-tertiary-container: #2e0b3b,
+    tertiary-fixed: #f9d8ff,
+    tertiary-fixed-dim: #e5b6f1,
+    on-tertiary-fixed: #2e0b3b,
+    on-tertiary-fixed-variant: #5d386a,
+    background: #fcf8f8,
+    on-background: #1c1b1c,
+    surface: #fcf8f8,
+    surface-dim: #dcd9d9,
+    surface-bright: #fcf8f8,
+    surface-container-lowest: #ffffff,
+    surface-container-low: #f6f3f2,
+    surface-container: #f1eded,
+    surface-container-high: #ebe7e7,
+    surface-container-highest: #e5e2e1,
+    on-surface: #1c1b1c,
+    shadow: #000000,
+    scrim: #000000,
+    surface-tint: #5c5e61,
+    inverse-surface: #313030,
+    inverse-on-surface: #f3f0ef,
+    outline: #75777a,
+    outline-variant: #c5c6cb,
+    neutral: #797777,
+    neutral10: #1c1b1c,
+    error: #ba1a1a,
+    error-container: #ffdad6,
+    on-error: #ffffff,
+    on-error-container: #410002,
+    surface-variant: #e1e2e7,
+    on-surface-variant: #44474a,
+    neutral-variant: #75777b,
+    neutral-variant20: #2e3134,
+    inverse-secondary: #b6c9dc,
+    inverse-tertiary: #e5b6f1,
+  ));
+}
+
+/* Dark Theme */
+.dark {
+  @include mat.theme-overrides((
+    primary: #99ccf9,
+    on-primary: #003351,
+    primary-container: #074b71,
+    on-primary-container: #cce5ff,
+    inverse-primary: #2c638a,
+    primary-fixed: #cce5ff,
+    primary-fixed-dim: #99ccf9,
+    on-primary-fixed: #001e31,
+    on-primary-fixed-variant: #074b71,
+    secondary: #b6c9dc,
+    on-secondary: #203242,
+    secondary-container: #374959,
+    on-secondary-container: #d2e5f9,
+    secondary-fixed: #d2e5f9,
+    secondary-fixed-dim: #b6c9dc,
+    on-secondary-fixed: #0a1d2c,
+    on-secondary-fixed-variant: #374959,
+    tertiary: #e5b6f1,
+    on-tertiary: #452251,
+    tertiary-container: #5d386a,
+    on-tertiary-container: #f9d8ff,
+    tertiary-fixed: #f9d8ff,
+    tertiary-fixed-dim: #e5b6f1,
+    on-tertiary-fixed: #2e0b3b,
+    on-tertiary-fixed-variant: #5d386a,
+    background: #131313,
+    on-background: #e5e2e1,
+    surface: #131313,
+    surface-dim: #131313,
+    surface-bright: #3a3939,
+    surface-container-lowest: #0e0e0e,
+    surface-container-low: #1c1b1c,
+    surface-container: #201f20,
+    surface-container-high: #2a2a2a,
+    surface-container-highest: #353435,
+    on-surface: #e5e2e1,
+    shadow: #000000,
+    scrim: #000000,
+    surface-tint: #c5c6ca,
+    inverse-surface: #e5e2e1,
+    inverse-on-surface: #313030,
+    outline: #8f9194,
+    outline-variant: #44474a,
+    neutral: #797777,
+    neutral10: #1c1b1c,
+    error: #ffb4ab,
+    error-container: #93000a,
+    on-error: #690005,
+    on-error-container: #ffdad6,
+    surface-variant: #44474a,
+    on-surface-variant: #c5c6cb,
+    neutral-variant: #75777b,
+    neutral-variant20: #2e3134,
+    inverse-secondary: #4e6071,
+    inverse-tertiary: #775083,
+  ));
+}
+
+/* Typography */
+:root, :host {
+  /* core typography tokens are not generating css variables, hence below */
+  --mat-sys-brand-font-family: Roboto;
+  --mat-sys-plain-font-family: Roboto;
+  --mat-sys-bold-font-weight: 700;
+  --mat-sys-medium-font-weight: 500;
+  --mat-sys-regular-font-weight: 400;
+
+  @include mat.theme-overrides((
+    brand-family: Roboto,
+    plain-family: Roboto,
+    bold-weight: 700,
+    medium-weight: 500,
+    regular-weight: 400,
+  ));
+}
