@@ -40,7 +40,7 @@ export class CandidatesService {
       const excelDto = plainToClass(CandidateExcelDto, {
         seniority: rowData.Seniority?.toLowerCase(),
         years: Number(rowData['Years of experience']),
-        availability: Boolean(rowData.Availability),
+        availability: rowData.Availability,
       });
 
       const errors = await validate(excelDto);

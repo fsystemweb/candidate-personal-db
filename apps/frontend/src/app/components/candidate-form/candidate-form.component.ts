@@ -42,43 +42,45 @@ export class CandidateFormComponent {
   candidateForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
     surname: ['', [Validators.required]],
-    file: [null as File | null],
+    file: [null, Validators.required],
   });
 
-  fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+  fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInputRef');
   formDirective = viewChild<FormGroupDirective>('formDir');
+  selectedFile: File | null = null;
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const fileControl = this.candidateForm.get('file');
-
     if (input.files?.length) {
-      fileControl?.patchValue(input.files[0]);
+      this.selectedFile = input.files[0];
+      this.candidateForm.get('file')?.setValue('valid');
     } else {
-      fileControl?.patchValue(null);
+      this.selectedFile = null;
+      this.candidateForm.get('file')?.setValue(null);
     }
+    this.candidateForm.get('file')?.markAsTouched();
+  }
 
+  onFileBlur(): void {
+    const fileControl = this.candidateForm.get('file');
     fileControl?.markAsTouched();
-
-    if (!fileControl?.value) {
-      fileControl?.setErrors({ required: true });
-    } else {
-      fileControl?.setErrors(null);
-    }
   }
 
   onSubmit(): void {
-    if (this.candidateForm.valid) {
-      const formData = new FormData();
-      const values = this.candidateForm.value;
-      formData.append('name', values.name);
-      formData.append('surname', values.surname);
-      formData.append('file', values.file);
-
-      this.formSubmit.emit(formData);
-
-      this.resetForm();
+    if (this.candidateForm.invalid || !this.selectedFile) {
+      this.candidateForm.markAllAsTouched();
+      return;
     }
+
+    const formData = new FormData();
+    const values = this.candidateForm.value;
+
+    formData.append('name', values.name);
+    formData.append('surname', values.surname);
+    formData.append('file', this.selectedFile, this.selectedFile.name);
+
+    this.formSubmit.emit(formData);
+    this.resetForm();
   }
 
   private resetForm(): void {
@@ -89,5 +91,7 @@ export class CandidateFormComponent {
     if (fileInputElement) {
       fileInputElement.value = '';
     }
+
+    this.selectedFile = null;
   }
 }

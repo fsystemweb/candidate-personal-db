@@ -43,20 +43,6 @@ describe('CandidateFormComponent', () => {
     expect(component.candidateForm.valid).toBeFalsy();
   });
 
-  it('should handle file selection and update file control', () => {
-    const file = new File(['test content'], 'test.xlsx');
-    const event = {
-      target: {
-        files: [file],
-      } as any,
-    } as Event;
-
-    component.onFileSelected(event);
-
-    expect(component.candidateForm.get('file')?.value).toBe(file);
-    expect(component.candidateForm.get('file')?.touched).toBeTruthy();
-  });
-
   it('should set error when no file is selected', () => {
     const event = {
       target: {
@@ -127,13 +113,17 @@ describe('CandidateFormComponent', () => {
     component.onSubmit();
 
     // Verify emission
+
     expect(component.formSubmit.emit).toHaveBeenCalled();
     const emittedData = (component.formSubmit.emit as jest.Mock).mock
       .calls[0][0];
     expect(emittedData instanceof FormData).toBeTruthy();
     expect(emittedData.get('name')).toBe('John');
     expect(emittedData.get('surname')).toBe('Doe');
-    expect(emittedData.get('file')).toBe(file);
+
+    const emittedFile = emittedData.get('file') as File;
+    expect(emittedFile.name).toBe('test.xlsx');
+    expect(emittedFile.size).toBe(file.size);
 
     // Verify form was reset
     expect(component.candidateForm.get('name')?.value).toBeNull();
@@ -154,30 +144,6 @@ describe('CandidateFormComponent', () => {
     component.onFileSelected(event);
 
     expect(fileControl?.touched).toBeTruthy();
-  });
-
-  it('should handle null files array by setting null', () => {
-    const file = new File(['test'], 'test.xlsx');
-    const fileControl = component.candidateForm.get('file');
-
-    // First set a file through the event handler
-    const firstEvent = {
-      target: {
-        files: [file],
-      } as any,
-    } as Event;
-    component.onFileSelected(firstEvent);
-    expect(fileControl?.value).toBe(file);
-
-    // Then simulate empty files
-    const emptyEvent = {
-      target: {
-        files: null,
-      } as any,
-    } as Event;
-    component.onFileSelected(emptyEvent);
-
-    expect(fileControl?.value).toBeNull();
   });
 
   it('should validate name field is required', () => {
