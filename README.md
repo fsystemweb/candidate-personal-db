@@ -3,7 +3,8 @@
 <p align="center">
   <img src="docs/logo.png" alt="logo" width="120px" height="120px"/>
   <br>
-  <em>AA full-stack candidate management application built with Angular 20, NestJS, and Nx monorepo. 
+  <em> Reactive Form Example with Angular 20 and NestJs
+    <br>A full-stack candidate management application built with Angular 20, NestJS, and Nx monorepo. 
     <br> Upload Excel files with candidate data and manage profiles efficiently with instant processing and persistent storage locally.</em>
   <br>
 </p>
