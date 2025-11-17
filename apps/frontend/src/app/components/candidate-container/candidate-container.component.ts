@@ -15,7 +15,7 @@ import { of } from 'rxjs';
 import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
 import { CandidateTableComponent } from '../candidate-table/candidate-table.component';
 import { CandidateService } from '../../services/candidate.service';
-import { PersistenceService } from '../../services/persistence.service';
+import { CandidateStorageService } from '../../services/candidate-storage.service';
 import { Candidate } from '@candidate-db/shared';
 
 @Component({
@@ -33,11 +33,13 @@ import { Candidate } from '@candidate-db/shared';
 })
 export class CandidateContainerComponent {
   private readonly candidateService = inject(CandidateService);
-  private readonly persistenceService = inject(PersistenceService);
+  private readonly candidateStorageService = inject(CandidateStorageService);
   private readonly snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  candidates = signal<Candidate[]>(this.persistenceService.loadCandidates());
+  candidates = signal<Candidate[]>(
+    this.candidateStorageService.loadCandidates()
+  );
   loading = signal(false);
 
   onFormSubmit(formData: FormData): void {
@@ -53,7 +55,7 @@ export class CandidateContainerComponent {
         tap((candidate) => {
           const updatedCandidates = [...this.candidates(), candidate];
           this.candidates.set(updatedCandidates);
-          this.persistenceService.saveCandidates(updatedCandidates);
+          this.candidateStorageService.saveCandidates(updatedCandidates);
           this.snackBar.open('Candidate processed successfully!', 'Close', {
             duration: 3000,
           });
@@ -74,7 +76,7 @@ export class CandidateContainerComponent {
 
   clearCandidates(): void {
     this.candidates.set([]);
-    this.persistenceService.clearCandidates();
+    this.candidateStorageService.clearCandidates();
     this.snackBar.open('All candidates cleared', 'Close', { duration: 2000 });
   }
 }

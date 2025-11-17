@@ -27,7 +27,8 @@ export class CandidatesService {
   private async parseExcelFile(file: any): Promise<CandidateExcelDto> {
     try {
       const workbook = XLSX.read(file.buffer, { type: 'buffer' });
-      const sheetName = workbook.SheetNames[0];
+      const FIRST_SHEET_INDEX = 0;
+      const sheetName = workbook.SheetNames[FIRST_SHEET_INDEX];
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
@@ -35,11 +36,13 @@ export class CandidatesService {
         throw new BadRequestException('Excel file is empty');
       }
 
-      const rowData = jsonData[0] as any;
+      const FIRST_ROW_INDEX = 0;
+      const rowData = jsonData[FIRST_ROW_INDEX] as any;
+      const YEARS_EXPERIENCE_KEY = 'Years of experience';
 
       const excelDto = plainToClass(CandidateExcelDto, {
         seniority: rowData.Seniority?.toLowerCase(),
-        years: Number(rowData['Years of experience']),
+        years: Number(rowData[YEARS_EXPERIENCE_KEY]),
         availability: rowData.Availability,
       });
 

@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="docs/DEVELOPMENT.md">Devlopment Guidelines</a>
+  <a href="docs/DEVELOPMENT.md">Development Guidelines</a>
   <br>
   <br>
 </p>

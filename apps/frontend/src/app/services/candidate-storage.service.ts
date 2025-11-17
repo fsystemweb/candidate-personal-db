@@ -4,7 +4,7 @@ import { Candidate } from '@candidate-db/shared';
 @Injectable({
   providedIn: 'root',
 })
-export class PersistenceService {
+export class CandidateStorageService {
   private readonly storageKey = 'candidates';
 
   saveCandidates(candidates: Candidate[]): void {
