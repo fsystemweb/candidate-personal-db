@@ -28,9 +28,9 @@
       id="file-input"
       type="file"
       (change)="onFileSelected($event)"
+      (blur)="onFileBlur()"
       accept=".xlsx,.xls"
-      required
-      formControlName="file"
+      #fileInputRef
     />
     <div class="error-message">
       @if (candidateForm.get('file')?.hasError('required') &&

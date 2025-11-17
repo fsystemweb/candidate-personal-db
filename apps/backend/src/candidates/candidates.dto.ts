@@ -25,7 +25,6 @@ export class CandidateExcelDto {
   @Transform(({ value }) => Number(value))
   years!: number;
 
-  @IsBoolean()
-  @Transform(({ value }) => Boolean(value))
+  @IsBoolean({ message: 'availability must be a valid boolean' })
   availability!: boolean;
 }
